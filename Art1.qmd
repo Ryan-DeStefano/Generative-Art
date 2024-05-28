@@ -106,3 +106,33 @@ create_art(num_circles = 50, num_lines = 40, circle_col = "orange", circle_borde
 
 create_art(num_circles = 80, num_lines = 50, circle_col = "orange", circle_border = "orange", circle_shape = 21, circle_size = 3, line_col = "yellow", line_size = 1, background_col = "skyblue", seed = 7)
 ```
+
+```{r}
+create_art(num_circles = 80, num_lines = 50, circle_col = "purple", circle_border = "purple", circle_shape = 21, circle_size = 5, line_col = "green", line_size = 1, background_col = "black", seed = 7)
+```
+
+Title: Lazer Tag
+
+Description: This art piece by astute artist, Ryan DeStefano, aims to reflect the childlike mind when thinking about a simple fun activity such as lazer tag. In this top down view of a lazer tag arena, the purple dots represent participants while the lime green lines represent the lazers being shot.
+
+Code Choices:
+
+-   By setting the num_circles arg to 80, we obtain 80 dots in the image.
+
+-   By setting num_lines to 50, we obtain 50 lines in the image.
+
+-   By setting circle_col to "purple", the dots are filled in with purple.
+
+-   By setting circle_border to "purple", the border of the dots are purple.
+
+-   By setting circle_shape to 21, we get circles for the shape of the points.
+
+-   By setting circle_size to 5, the size of the points is decided, in this case they are relatively large.
+
+-   By setting line_col to "green", the lines become green.
+
+-   The line size is set by specifying the arg line_size.
+
+-   The background of the image is set to black with the background_col arg.
+
+-   The seed arg is set to 7, I just like that number, it could be anything.
