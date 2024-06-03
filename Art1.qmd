@@ -66,7 +66,7 @@ dat |>
 ## Art Piece 1
 
 ```{r}
- create_art <- function(num_circles = 20, num_lines = 20, circle_col = "blue", circle_border = "white", circle_shape = 21, circle_size = 3, line_col = "red", line_size = 1, background_col = "black", seed = 1) {
+create_art <- function(num_circles = 20, num_lines = 20, circle_col = "blue", circle_border = "white", circle_shape = 21, circle_size = 3, line_col = "red", line_size = 1, background_col = "black", seed = 1) {
 
   # Set seed for reproducibility
   set.seed(seed)
@@ -133,6 +133,55 @@ create_art(num_circles = 80, num_lines = 50, circle_col = "purple", circle_borde
 -   The background of the image is set to black with the background_col arg.
 
 -   The seed arg is set to 7, I just like that number, it could be anything.
+
+## Using gganimate
+
+```{r}
+create_art_animated <- function(num_circles = 20, num_lines = 20, circle_col = "blue", circle_border = "white", circle_shape = 21, circle_size = 3, line_col = "red", line_size = 1, background_col = "black", seed = 1, duration = 5) {
+  # Set seed for reproducibility
+  set.seed(seed)
+  
+  # Generate random data for circles
+  circles <- data.frame(
+    x = runif(num_circles),
+    y = runif(num_circles),
+    r = runif(num_circles, 0.01, 0.05),
+    state = sample(letters[1:5], num_circles, replace = TRUE) # Dummy state column
+  )
+  
+  # Generate random data for lines
+  lines <- data.frame(
+    x1 = runif(num_lines),
+    y1 = runif(num_lines),
+    x2 = runif(num_lines),
+    y2 = runif(num_lines),
+    state = sample(letters[1:5], num_lines, replace = TRUE) # Dummy state column
+  )
+  
+  # Create the plot
+  p <- ggplot() +
+    # Add circles
+    geom_point(data = circles, aes(x = x, y = y), shape = circle_shape, size = circle_size, fill = circle_col, color = circle_border, alpha = 0.7) +
+    # Add lines
+    geom_segment(data = lines, aes(x = x1, y = y1, xend = x2, yend = y2), color = line_col, size = line_size, alpha = 0.7) +
+    # Customize the theme
+    theme_void() +
+    theme(
+      panel.background = element_rect(fill = background_col, color = background_col)
+    )
+  
+  # Animate the plot
+  animated_plot <- p + transition_states(states = state, transition_length = 1, state_length = duration) +
+    enter_fade() + exit_fade()
+  
+  # Return the animated plot
+  return(animated_plot)
+}
+
+# Example usage:
+animated_plot <- create_art_animated(num_circles = 100)
+animate(animated_plot, renderer = gifski_renderer())
+```
 
 ## Art Piece 2
 
